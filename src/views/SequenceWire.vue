@@ -5,10 +5,9 @@
       </b-row>
       <b-card-group deck class="sequence_wire">
           <b-card
-            border-variant="primary"
+            border-variant="light"
             header="赤いワイヤの出現回数"
-            header-bg-variant="primary"
-            header-text-variant="white"
+            header-bg-variant="light"
            >
             <b-container fluid="sm">
               <b-row class="text-center">
@@ -22,10 +21,9 @@
             </b-container>
           </b-card>
           <b-card
-            border-variant="primary"
+            border-variant="light"
             header="赤いワイヤの出現回数"
-            header-bg-variant="primary"
-            header-text-variant="white"
+            header-bg-variant="light"
            >
             <b-container fluid="sm">
               <b-row>
@@ -39,10 +37,9 @@
             </b-container>
           </b-card>
           <b-card 
-            border-variant="primary"
+            border-variant="light"
             header="赤いワイヤの出現回数"
-            header-bg-variant="primary"
-            header-text-variant="white"
+            header-bg-variant="light"
            >
             <b-container fluid="sm">
               <b-row>
@@ -99,7 +96,7 @@ export default {
  }
 
  .activeColor{
-   color: white;
+   color: light;
    background-color: #444444;
  }
 
