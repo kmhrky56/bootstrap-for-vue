@@ -96,7 +96,7 @@ export default {
  }
 
  .activeColor{
-   color: light;
+   color: white;
    background-color: #444444;
  }
 

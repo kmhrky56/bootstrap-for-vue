@@ -1,24 +1,17 @@
 <template>
-    <div>鋭意製作中</div>
-    <!-- <b-container fluid>
-        <b-row>
-            ワイヤーを{{cut()}}
-            {{selectedWire}}
-        </b-row>
-        <b-row>
-            <b-col><b-btn @click="clearCheckboxWire">クリア</b-btn></b-col>
-            <b-col><b-checkbox v-model="selectedWire" value="red"  label="赤"></b-checkbox></b-col>
-            <b-col><b-checkbox v-model="selectedWire" value="blue" label="青"></b-checkbox></b-col>
-            <b-col><b-checkbox v-model="selectedWire" value="star" label="星付き"></b-checkbox></b-col>
-            <b-col><b-checkbox v-model="selectedWire" value="led"  label="LED点灯"></b-checkbox></b-col>
-        </b-row>
-        <b-row>
-            <b-col><b-btn @click="clearCheckboxCase">クリア</b-btn></b-col>
-            <b-col><b-checkbox v-model="selectedCase" value="odd"      label="シリアルナンバーの最後の数字が偶数か"></b-checkbox></b-col>
-            <b-col><b-checkbox v-model="selectedCase" value="parallel" label="パラレルポート"></b-checkbox></b-col>
-            <b-col><b-checkbox v-model="selectedCase" value="battery"  label="バッテリーが二本以上"></b-checkbox></b-col>
-        </b-row>
-    </b-container> -->
+    <div class="wrap">
+        <div>鋭意製作中</div>
+        <b-form-checkbox-group
+            v-model="selected"
+            :options="optionsWire"
+         >
+        </b-form-checkbox-group>
+        <b-form-checkbox-group
+            v-model="selected"
+            :options="optionCase"
+         >
+        </b-form-checkbox-group>
+    </div>
 </template>
 <script>
 export default {
@@ -27,14 +20,37 @@ export default {
         return {
             selectedCase:[],
             selectedWire:[],
+            selected:[],
+            optionsWire:[{text:"赤", value:0x08}, {text:"青", value:0x04}, {text:"星", value:0x02}, {text:"LED", value:0x01}],
+            optionCase:[{text:"シリアルナンバーの最後の数字が偶数か", value:0x40}, {text:"パラレルポート", value:0x20}, {text:"バッテリーが二本以上", value:0x10}],
         };
     },
 
     computed:{
-
+        
     },
 
     methods:{
+        bitCut(){
+            const bit = this.selected.reduce((acc, cur) => acc | cur, 0x00);
+            let result = "切らない";
+
+            //順番に白のみ、        (赤)星のみ、     バッテリー(赤)星LED、      赤LED、                  偶数かつ(赤または青)、LED
+            if( !(bit & 0x0f) || (bit & 0x07) == 0x02 || (bit & 0x17) == 0x13 || (bit & 0x1f) == 0x19 || (bit & 0x43) == 0x40 || (bit & 0x4f) == 0x4d ||
+            //
+            (bit & 0x2d) == 0x25 
+            )
+            {
+                result = "切る";
+            }
+            else
+            {
+                //切らない   
+            }
+
+            return result;
+        },
+
         clearCheckboxCase(){
             this.selectedCase = [];
         },
