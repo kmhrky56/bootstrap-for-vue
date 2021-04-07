@@ -11,6 +11,7 @@
             :options="optionCase"
          >
         </b-form-checkbox-group>
+         <div>{{bitCut()}}</div>
     </div>
 </template>
 <script>
