@@ -7,6 +7,9 @@
       <b-tab title="複雑ワイヤ">
         <ComplicatedWire></ComplicatedWire>
       </b-tab>
+      <b-tab title="ワイヤ">
+        <Wire></Wire>
+      </b-tab>
     </b-tabs>
   </div>
 </template>
@@ -14,11 +17,13 @@
 <script>
 import SequenceWire from '@/views/SequenceWire';
 import ComplicatedWire from '@/views/ComplicatedWire';
+import Wire from '@/views/Wire';
 
 export default {
   components:{
     SequenceWire,
-    ComplicatedWire
+    ComplicatedWire,
+    Wire,
   },
 }
 </script>
